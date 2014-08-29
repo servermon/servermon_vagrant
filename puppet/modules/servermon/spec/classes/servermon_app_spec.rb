@@ -2,8 +2,10 @@ require 'spec_helper'
 
 describe 'servermon', :type => :class do
     let(:params) { {
-        :ensure    => 'present',
-        :directory => '/tmp/test',
+        :ensure     => 'present',
+        :directory  => '/tmp/test',
+        :db_name    => 'testdb',
+        :secret_key => 'superdupersecret'
         }
     }
 
@@ -16,4 +18,6 @@ describe 'servermon', :type => :class do
     it { should contain_package('gunicorn') }
     it { should contain_service('gunicorn') }
     it { should contain_file('/etc/gunicorn.d/servermon').with_content(/\/tmp\/test/) }
+    it { should contain_file('/tmp/test/settings.py').with_content(/testdb/) }
+    it { should contain_file('/tmp/test/urls.py') }
 end

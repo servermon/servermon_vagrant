@@ -1,6 +1,14 @@
 class servermon(
     $ensure='present',
-    $directory
+    $directory,
+    $secret_key,
+    $db_name,
+    $db_engine='sqlite3',
+    $db_user='',
+    $db_password='',
+    $db_host='',
+    $db_port='',
+    $admins=undef,
 ) {
 
     package { [
@@ -24,11 +32,28 @@ class servermon(
         ensure => $service_ensure,
     }
 
+    file { "$directory/settings.py":
+        ensure  => $ensure,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0555',
+        content => template('servermon/settings.py.erb'),
+    }
+
+    file { "$directory/urls.py":
+        ensure  => $ensure,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0555',
+        source  => 'puppet:///modules/servermon/urls.py',
+    }
+
     file { '/etc/gunicorn.d/servermon':
         ensure  => $ensure,
         owner   => 'root',
         group   => 'root',
         mode    => '0555',
         content => template('servermon/gunicorn.erb'),
+        require => Package['gunicorn'],
     }
 }

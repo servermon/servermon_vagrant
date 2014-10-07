@@ -25,16 +25,4 @@ stick to that, as I have done zero testing with older versions
     ./manage.py syncdb
     ./manage.py migrate
 
-And at your host http://localhost:8080
-
-Note: You will get an error about fact_names. The easy way of dealing with it
-right now is
-
-.. code-block:: bash
-
-    cd /srv/servermon/servermon
-    sed -i -e 's/managed = False/#managed = False/' puppet/models.py
-    ./manage.py syncdb
-    sed -i -e 's/#managed = False/managed = False/' puppet/models.py
-
-And go on with developing.
+And at your host http://localhost:8080. Happy developing

@@ -1,0 +1,41 @@
+#####################################################################
+### THIS FILE IS MANAGED BY PUPPET
+#####################################################################
+# vim: filetype=apache
+
+<VirtualHost *:80>
+
+    ServerName mysite.example.org
+
+    RewriteEngine on
+    RewriteRule ^/(.*)$ https://mysite.example.org/$1 [R=301]
+
+</VirtualHost>
+
+<VirtualHost *:443>
+
+    ServerName mysite.example.org
+
+    SSLEngine On
+    SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
+    SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+    SSLCACertificatePath /etc/ssl/certs
+
+    DocumentRoot /
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride None
+    </Directory>
+
+    ErrorLog /var/log/apache2/error.log
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+
+    ProxyPass / http://localhost:8090
+    ProxyPassReverse / http://localhost:8090
+
+    CustomLog /var/log/apache2/access.log combined
+    ServerSignature On
+</VirtualHost>

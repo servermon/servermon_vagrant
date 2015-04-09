@@ -40,9 +40,9 @@ Otherwise, the return value is the unmodified $ensure parameter.
     }
 
 
-## ensure_directory
+## ensure_link
 
-`ensure_directory( string|bool $ensure )`
+`ensure_link( string|bool $ensure )`
 
 Takes a generic 'ensure' parameter value and convert it to an
 appropriate value for use with a symlink file declaration.
@@ -62,6 +62,31 @@ Otherwise, the return value is the unmodified $ensure parameter.
         file { '/etc/rsyslog.d/50-default.conf':
             ensure => ensure_link($ensure),
             target => '/usr/share/rsyslog/50-default.conf',
+        }
+    }
+
+
+## ensure_service
+
+`ensure_service( string|bool $ensure )`
+
+Takes a generic 'ensure' parameter value and convert it to an
+appropriate value for use with a service declaration.
+
+If $ensure is 'true' or 'present', the return value is 'running'.
+Otherwise, the return value is 'stopped'.
+
+### Examples
+
+    # Sample class which starts or stops the redis service
+    # based on the class's generic $ensure parameter:
+    class redis( $ensure = present ) {
+        package { 'redis-server':
+            ensure => $ensure,
+        }
+        service { 'redis':
+            ensure  => ensure_service($ensure),
+            require => Package['redis-server'],
         }
     }
 
@@ -104,9 +129,46 @@ Emit a hash as YAML with keys (both shallow and deep) in sorted order.
     }
 
 
-## require_packages
+## os_version
 
-`require_packages( string $package_name [, string $... ] )`
+`os_version( string $version_predicate )`
+
+Performs semantic OS version comparison.
+
+Takes one or more string arguments, each containing one or more predicate
+expressions. Each expression consts of a distribution name, followed by a
+comparison operator, followed by a release name or number. Multiple clauses
+are OR'd together. The arguments are case-insensitive.
+
+The host's OS version will be compared to to the comparison target
+using the specified operator, returning a boolean. If no operator is
+present, the equality operator is assumed.
+
+### Examples
+
+    # True if Ubuntu Trusty or newer or Debian Jessie or newer
+    os_version('ubuntu >= trusty || debian >= Jessie')
+
+    # True if exactly Debian Jessie
+    os_version('debian jessie')
+
+
+## php_ini
+
+`php_ini( hash $ini_settings [, hash $... ] )`
+
+Serialize a hash into php.ini-style format. Takes one or more hashes as
+arguments. If the argument list contains more than one hash, they are
+merged together. In case of duplicate keys, hashes to the right win.
+
+### Example
+
+    php_ini({'server' => {'port' => 80}}) # => server.port = 80
+
+
+## require_package
+
+`require_package( string $package_name [, string $... ] )`
 
 Declare one or more packages a dependency for the current scope.
 This is equivalent to declaring and requiring the package resources.
@@ -119,11 +181,11 @@ evaluating any of the resources in the current scope.
     require_package('python-redis')
 
     # Multiple packages as arguments
-    require_packages('redis-server', 'python-redis')
+    require_package('redis-server', 'python-redis')
 
     # Multiple packages as array
     $deps = [ 'redis-server', 'python-redis' ]
-    require_packages($deps)
+    require_package($deps)
 
 
 ## requires_realm
@@ -139,23 +201,23 @@ Abort catalog compilation if it is not.
     requires_realm('labs')
 
 
-## requires_ubuntu
+## requires_os
 
-`requires_ubuntu( string $version_predicate )`
+`requires_os( string $version_predicate )`
 
-Validate that the host Ubuntu version satisfies a version
+Validate that the host OS version satisfies a version
 check. Abort catalog compilation if not.
 
-See the documentation for ubuntu_version() for supported
+See the documentation for os_version() for supported
 predicate syntax.
 
 ### Examples
 
-    # Fail unless version is Trusty
-    requires_ubuntu('trusty')
+    # Fail unless version is Trusty or Jessie
+    requires_os('ubuntu trusty || debian jessie')
 
     # Fail unless Trusty or newer
-    requires_ubuntu('> trusty')
+    requires_os('ubuntu >= trusty')
 
 
 
@@ -213,46 +275,27 @@ configuration part.
     ssl_ciphersuite('nginx', 'strong')
 
 
-## ubuntu_version
+## to_milliseconds
+`to_milliseconds( string $time_spec )`
 
-`ubuntu_version( string $version_predicate )`
-
-Performs semantic Ubuntu version comparison.
-
-Takes a single string argument containing a comparison operator
-followed by an optional space, followed by a comparison target,
-provided as Ubuntu version number or release name.
-
-The host's Ubuntu version will be compared to to the comparison target
-using the specified operator, returning a boolean. If no operator is
-present, the equality operator is assumed.
-
-Release names are case-insensitive. The comparison operator and
-comparison target can be provided as two separate arguments, if you
-prefer.
+Convert a unit of time expressed as a string to milliseconds.
 
 ### Examples
 
-    # True if Precise or newer
-    ubuntu_version('>= precise')
-    ubuntu_version('>= 12.04.4')
+    to_milliseconds('1s')        # 1000
+    to_milliseconds('1 second')  # 1000
 
-    # True if older than Utopic
-    ubuntu_version('< utopic')
 
-    # True if newer than Precise
-    ubuntu_version('> precise')
+## to_seconds
+`to_seconds( string $time_spec )`
 
-    # True if Trusty or older
-    ubuntu_version('<= trusty')
+Convert a unit of time expressed as a string to seconds.
 
-    # True if exactly Trusty
-    ubuntu_version('trusty')
-    ubuntu_version('== trusty')
+### Examples
 
-    # True if anything but Trusty
-    ubuntu_version('!trusty')
-    ubuntu_version('!= trusty')
+    to_seconds('9000ms')  # 9
+    to_seconds('1hr')     # 3600
+    to_seconds('2 days')  # 172800
 
 
 ## validate_ensure

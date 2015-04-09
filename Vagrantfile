@@ -9,8 +9,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "puppetlabs/debian-7.4-64-puppet"
+  config.vm.define "precise" do |precise|
+      precise.vm.box = "precise-cloud"
+      precise.vm.network "forwarded_port", guest: 8090, host: 10090
+      precise.vm.network "forwarded_port", guest: 80, host: 10080
+      precise.vm.network "forwarded_port", guest: 443, host: 10443
+  end
+  config.vm.define "trusty" do |trusty|
+      trusty.vm.box = "puppetlabs/ubuntu-14.04-64-puppet"
+      trusty.vm.network "forwarded_port", guest: 8090, host: 11090
+      trusty.vm.network "forwarded_port", guest: 80, host: 11080
+      trusty.vm.network "forwarded_port", guest: 443, host: 11443
+  end
+  config.vm.define "jessie" do |jessie|
+      jessie.vm.box = "elmerfud/debian-amd64-jessie"
+      jessie.vm.network "forwarded_port", guest: 8090, host: 12090
+      jessie.vm.network "forwarded_port", guest: 80, host: 12080
+      jessie.vm.network "forwarded_port", guest: 443, host: 12443
+  end
+  config.vm.define "wheezy" do |wheezy|
+      wheezy.vm.box = "puppetlabs/debian-7.4-64-puppet"
+      wheezy.vm.network "forwarded_port", guest: 8090, host: 13090
+      wheezy.vm.network "forwarded_port", guest: 80, host: 13080
+      wheezy.vm.network "forwarded_port", guest: 443, host: 13443
+  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -20,9 +42,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 8090 on the guest machine.
-  config.vm.network "forwarded_port", guest: 8090, host: 8090
-  config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "forwarded_port", guest: 443, host: 8443
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.

@@ -16,8 +16,10 @@ urlpatterns = patterns('',
     (r'^advancedsearch/$', 'servermon.projectwide.views.advancedsearch'),
     (r'^query/?$',      'servermon.puppet.views.query'),
     # Opensearch
-    url(r'^opensearch.xml$', 'servermon.projectwide.views.opensearch', name="opensearch"),
-    url(r'^suggest/$', 'servermon.projectwide.views.suggest', name="opensearchsuggestions"),
+    url(r'^opensearch.xml$', 'servermon.projectwide.views.opensearch',
+                            name="opensearch"),
+    url(r'^suggest/$', 'servermon.projectwide.views.suggest',
+                            name="opensearchsuggestions"),
     # Uncomment the next lines to enable the admin & hwdoc:
     (r'^admin/',        include(admin.site.urls)),
     # (r'^admin/doc/',    include('django.contrib.admindocs.urls')),

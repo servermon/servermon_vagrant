@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   config.vm.define "precise" do |precise|
-      precise.vm.box = "precise-cloud"
+      precise.vm.box = "puppetlabs/ubuntu-12.04-64-puppet"
       precise.vm.network "forwarded_port", guest: 8090, host: 10090
       precise.vm.network "forwarded_port", guest: 80, host: 10080
       precise.vm.network "forwarded_port", guest: 443, host: 10443
@@ -28,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       jessie.vm.network "forwarded_port", guest: 443, host: 12443
   end
   config.vm.define "wheezy" do |wheezy|
-      wheezy.vm.box = "puppetlabs/debian-7.4-64-puppet"
+      wheezy.vm.box = "puppetlabs/debian-7.8-64-puppet"
       wheezy.vm.network "forwarded_port", guest: 8090, host: 13090
       wheezy.vm.network "forwarded_port", guest: 80, host: 13080
       wheezy.vm.network "forwarded_port", guest: 443, host: 13443

@@ -31,24 +31,30 @@ stick to that, as I have done zero testing with other versions
     vagrant ssh <VM>
     cd /srv/servermon/servermon
 
-Where <VM> is one of: precise, trusty, jessie, wheezy
+Where <VM> is one of:
 
-And at your browser you can type
+ * precise
+ * trusty
+ * jessie
+ * wheezy
+
+Then point your browser to:
+
 http://localhost:<port>
 
 where port is one of the following:
 
-10090 -> precise gunicorn
-10080 -> precise apache proxying to unicorn
-10443 -> precise apache HTTPS proxying to unicorn
-11090 -> trusty gunicorn
-11080 -> trusty apache proxying to unicorn
-11443 -> trusty apache HTTPS proxying to unicorn
-12090 -> jessie gunicorn
-12080 -> jessie apache proxying to unicorn
-12443 -> jessie apache HTTPS proxying to unicorn
-13090 -> wheezy gunicorn
-13080 -> wheezy apache proxying to unicorn
-13443 -> wheezy apache HTTPS proxying to unicorn
+ * 10090 -> precise gunicorn
+ * 10080 -> precise apache proxying to unicorn
+ * 10443 -> precise apache HTTPS proxying to unicorn
+ * 11090 -> trusty gunicorn
+ * 11080 -> trusty apache proxying to unicorn
+ * 11443 -> trusty apache HTTPS proxying to unicorn
+ * 12090 -> jessie gunicorn
+ * 12080 -> jessie apache proxying to unicorn
+ * 12443 -> jessie apache HTTPS proxying to unicorn
+ * 13090 -> wheezy gunicorn
+ * 13080 -> wheezy apache proxying to unicorn
+ * 13443 -> wheezy apache HTTPS proxying to unicorn
 
 Happy developing.

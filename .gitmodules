@@ -1,0 +1,3 @@
+[submodule "servermon"]
+	path = servermon
+	url = http://github.com/servermon/servermon.git

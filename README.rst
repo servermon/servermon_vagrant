@@ -27,6 +27,7 @@ stick to that, as I have done zero testing with other versions
 
 .. code-block:: bash
 
+    git submodule update --init
     vagrant up
     vagrant ssh <VM>
     cd /srv/servermon/servermon
@@ -58,3 +59,10 @@ where port is one of the following:
  * 13443 -> wheezy apache HTTPS proxying to unicorn
 
 Happy developing.
+
+Notes
+=====
+
+The repository has a git submodule under servermon. That is the actual servermon
+software and it is there to make the multi environment development allowed by
+vagrant easier. Do not forget to occasionally git submodule update

@@ -5,5 +5,9 @@ apt-get update
 apt-get install git -y
 cd /srv/
 if [ ! -d servermon ]; then
-	git clone http://github.com/servermon/servermon.git
+	git clone /vagrant/servermon/
+else
+	cd servermon
+	git pull
+	git submodule update --init
 fi

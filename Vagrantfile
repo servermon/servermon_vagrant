@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       trusty.vm.network "forwarded_port", guest: 443, host: 11443
   end
   config.vm.define "jessie" do |jessie|
-      jessie.vm.box = "elmerfud/debian-amd64-jessie"
+      jessie.vm.box = "debian/jessie64"
       jessie.vm.network "forwarded_port", guest: 8090, host: 12090
       jessie.vm.network "forwarded_port", guest: 80, host: 12080
       jessie.vm.network "forwarded_port", guest: 443, host: 12443

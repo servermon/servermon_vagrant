@@ -55,7 +55,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.manifests_path = "puppet/manifests"
     puppet.module_path = "puppet/modules"
     puppet.manifest_file  = "site.pp"
-    puppet.options = ["--templatedir", "/vagrant/puppet/templates"]
   end
   config.vm.provision "shell" do |d|
       d.path = "django.sh"

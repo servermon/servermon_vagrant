@@ -82,7 +82,7 @@ SECRET_KEY = '<%= @secret_key %>'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#   'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
@@ -100,12 +100,12 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'servermon.urls'
 
 AUTHENTICATION_BACKENDS = (
-#    'djangobackends.ldapBackend.ldapBackend',
+    # 'djangobackends.ldapBackend.ldapBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
 LDAP_AUTH_SETTINGS = (
-    { 'url': 'ldap://ldap.example.org/', 'base': 'ou=People,dc=example,dc=org' },
+    {'url': 'ldap://ldap.example.org/', 'base': 'ou=People,dc=example,dc=org'},
 )
 
 LDAP_AUTH_GROUP = 'not-auth'
@@ -118,6 +118,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+# You probably want to uncomment pretty much everything here
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.admin',
@@ -128,7 +129,6 @@ INSTALLED_APPS = (
     'updates',
     'puppet',
     'hwdoc',
-    'south',
     'keyvalue',
 )
 
@@ -142,26 +142,26 @@ DATETIME_FORMAT = "d/m/Y H:i"
 
 HOST_TIMEOUT = 1800
 
-TICKETING_SYSTEM = 'dummy' # dummy, comments, jira are possible values
-COMMENTS_TICKETING_URL = "http://ticketing.example.com/"
+TICKETING_SYSTEM = 'dummy'  # dummy, comments, jira are possible values
+COMMENTS_TICKETING_URL = 'http://ticketing.example.com/'
 JIRA_TICKETING = {
     'url': 'http://ticketing.example.com/',
-    'search_string': 'text ~ {}', # {} replaced by double-quoted serial number for search
-    'projects': { # empty dict means "all projects"
-        'project1': { 'closed_string': 'closed' },
-        'project2': { 'closed_string': 'done' },
-        'project3': { 'closed_string': 'pining_for_the_fjords' },
+    'search_string': 'text ~ {}',  # {} replaced by double-quoted serial number for search
+    'projects': {  # empty dict means "all projects"
+        'project1': {'closed_string': 'closed'},
+        'project2': {'closed_string': 'done'},
+        'project3': {'closed_string': 'pining_for_the_fjords'},
         'project4': {},
     },
-    'projects_defaults': { 'closed_string': 'closed' },
+    'projects_defaults': {'closed_string': 'closed'},
     'auth': {
-        'type': 'none', # none, basic, oauth are possible values
+        'type': 'none',  # none, basic, oauth are possible values
         'user': '',                             # only used for basic
         'password': '',                         # only used for basic
         'access_token': '',                     # only used for oauth
-        'access_token_secret': '',             # only used for oauth
-        'consumer_key': 'jira-oauth-consumer', # only used for oauth
-        'key_cert': '/path/to/file',           # only used for oauth
+        'access_token_secret': '',              # only used for oauth
+        'consumer_key': 'jira-oauth-consumer',  # only used for oauth
+        'key_cert': '/path/to/file',            # only used for oauth
     },
 }
 
@@ -178,7 +178,7 @@ SILENCED_SYSTEM_CHECKS = ['1_6.W001']
 
 # Django extensions (apt-get install python-django-extensions)
 try:
-    import django_extensions
+    import django_extensions  # noqa
     INSTALLED_APPS = INSTALLED_APPS + ('django_extensions',)
 except ImportError:
     pass

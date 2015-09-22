@@ -70,3 +70,8 @@ Notes
 The repository has a git submodule under servermon. That is the actual servermon
 software and it is there to make the multi environment development allowed by
 vagrant easier. Do not forget to occasionally git submodule update
+
+precise is not able to load the sample data. This is due to some changes
+in the way datetimes are stored by django post version 1.3. This is
+probably not gonna be fixed since support for Django 1.3 and hence
+precise is due to be dropped soon

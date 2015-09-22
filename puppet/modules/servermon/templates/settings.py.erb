@@ -4,7 +4,11 @@ from django.conf import global_settings
 from django import VERSION as DJANGO_VERSION
 here = lambda x: os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
 
+<%- if @debug -%>
+DEBUG = True
+<%- else -%>
 DEBUG = False
+<%- end -%>
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

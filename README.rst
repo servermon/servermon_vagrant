@@ -13,9 +13,8 @@ setting up vagrant VMs. There are 4 different images chosen right now. Those are
  * Ubuntu Precise 64-bit
  * Ubuntu Trusty 64-bit
 
-A provided by VagrantCloud/Atlas.
+All provided by VagrantCloud/Atlas.
 All of them are 64-bit. That being said, servermon is architecture independent.
-
 
 Usage
 =====

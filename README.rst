@@ -28,15 +28,6 @@ stick to that, as I have done zero testing with other versions
 
     git submodule update --init
     vagrant up
-    vagrant ssh <VM>
-    cd /srv/servermon/servermon
-
-Where <VM> is one of:
-
- * precise
- * trusty
- * jessie
- * wheezy
 
 Then point your browser to:
 
@@ -56,6 +47,20 @@ where port is one of the following:
  * 13090 -> wheezy gunicorn
  * 13080 -> wheezy apache proxying to unicorn
  * 13443 -> wheezy apache HTTPS proxying to unicorn
+
+To start developing
+
+.. code-block:: bash
+
+    vagrant ssh <VM>
+    cd /srv/servermon/servermon
+
+Where <VM> is one of:
+
+ * precise
+ * trusty
+ * jessie
+ * wheezy
 
 Happy developing.
 

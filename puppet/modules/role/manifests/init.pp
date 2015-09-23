@@ -5,6 +5,7 @@ class role::servermon {
         secret_key => 'supersecretkey',
         db_name    => '/tmp/testdb',
         admins     => '( "Your admins", "admin@example.com")',
+        debug      => true,
     }
 
     include ::apache

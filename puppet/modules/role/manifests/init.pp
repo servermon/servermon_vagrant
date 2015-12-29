@@ -1,11 +1,12 @@
 class role::servermon {
     class { '::servermon':
-        ensure     => 'present',
-        directory  => '/srv/servermon/servermon',
-        secret_key => 'supersecretkey',
-        db_name    => '/tmp/testdb',
-        admins     => '( "Your admins", "admin@example.com")',
-        debug      => true,
+        ensure                => 'present',
+        directory             => '/srv/servermon/servermon',
+        secret_key            => 'supersecretkey',
+        db_name               => '/tmp/testdb',
+        managed_puppet_models => true,
+        admins                => '( "Your admins", "admin@example.com")',
+        debug                 => true,
     }
 
     include ::apache

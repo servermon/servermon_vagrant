@@ -20,7 +20,7 @@
 #   $db_port
 #       The database port, empty if sqlite3
 #   $managed_puppet_models
-#       Boolean. Defaults to False. Set this if you use this module in a
+#       Boolean. Defaults to false. Set this if you use this module in a
 #       development environment in order to have the module create the puppet
 #       tables for you. Do not use in production.
 #   $port
@@ -54,7 +54,7 @@ class servermon(
     $db_password='',
     $db_host='',
     $db_port='',
-    $managed_puppet_models=False,
+    $managed_puppet_models=false,
     $port=8090,
     $admins=undef,
     $debug=false,

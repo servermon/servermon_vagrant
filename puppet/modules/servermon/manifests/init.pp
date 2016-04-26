@@ -65,12 +65,12 @@ class servermon(
         'python-django',
         'python-django-south',
         'python-whoosh',
-        'python-ldap',
         'python-ipy',
         'gunicorn',
     ]:
         ensure => $ensure,
     }
+    require_package('python-ldap')
 
     service { 'gunicorn':
         ensure => ensure_service($ensure),
@@ -95,7 +95,7 @@ class servermon(
 
     cron { 'servermon_make_updates':
         command => "${directory}/servermon/manage.py make_updates --pythonpath=${directory}",
-        user    => "www-data",
+        user    => 'www-data',
         hour    => '*',
         minute  => '35',
     }

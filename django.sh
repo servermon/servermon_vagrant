@@ -1,6 +1,6 @@
 #!/bin/sh
 
 cd /srv/servermon/servermon
-./manage.py syncdb --noinput
-./manage.py migrate --noinput
-./manage.py loaddata vendor-model sampledata
+sudo -u www-data ./manage.py syncdb --noinput
+sudo -u www-data ./manage.py migrate --noinput
+sudo -u www-data ./manage.py loaddata vendor-model sampledata

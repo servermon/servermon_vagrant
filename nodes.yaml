@@ -1,0 +1,46 @@
+---
+precise:
+  box: ubuntu/precise64
+  forwarded_ports:
+  - :guest: 8090
+    :host: 10090
+  - :guest: 80
+    :host: 10080
+  - :guest: 443
+    :host: 10443
+trusty:
+  box: ubuntu/trusty64
+  forwarded_ports:
+  - :guest: 8090
+    :host: 11090
+  - :guest: 80
+    :host: 11080
+  - :guest: 443
+    :host: 11443
+jessie:
+  box: debian/contrib-jessie64
+  forwarded_ports:
+  - :guest: 8090
+    :host: 12090
+  - :guest: 80
+    :host: 12080
+  - :guest: 443
+    :host: 12443
+wheezy:
+  box: debian/wheezy64
+  forwarded_ports:
+  - :guest: 8090
+    :host: 13090
+  - :guest: 80
+    :host: 13080
+  - :guest: 443
+    :host: 13443
+xenial:
+  box: ubuntu/xenial64
+  forwarded_ports:
+  - :guest: 8090
+    :host: 14090
+  - :guest: 80
+    :host: 14080
+  - :guest: 443
+    :host: 14443

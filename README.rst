@@ -12,6 +12,7 @@ setting up vagrant VMs. There are 4 different images chosen right now. Those are
  * Debian Jessie 64-bit
  * Ubuntu Precise 64-bit
  * Ubuntu Trusty 64-bit
+ * Ubuntu Xenial 64-bit
 
 All provided by VagrantCloud/Atlas.
 All of them are 64-bit. That being said, servermon is architecture independent.
@@ -21,8 +22,8 @@ Usage
 
 Make sure you got vagrant and virtualbox. Vagrant version required is at least
 1.5 so you if you are using Debian Wheezy you will have to download the .deb
-manually. Virtualbox version used during development is 4.3, it might be best to
-stick to that, as I have done zero testing with other versions
+manually. Virtualbox version used during development is 5.1, it might be best to
+stick to that. However 4.3 was the starting point so it might still work
 
 .. code-block:: bash
 
@@ -33,20 +34,13 @@ Then point your browser to:
 
 http://localhost:<port>
 
-where port is one of the following:
+where port is best looked up in the nodes.yaml file. The following convention exists:
 
- * 10090 -> precise gunicorn
- * 10080 -> precise apache proxying to unicorn
- * 10443 -> precise apache HTTPS proxying to unicorn
- * 11090 -> trusty gunicorn
- * 11080 -> trusty apache proxying to unicorn
- * 11443 -> trusty apache HTTPS proxying to unicorn
- * 12090 -> jessie gunicorn
- * 12080 -> jessie apache proxying to unicorn
- * 12443 -> jessie apache HTTPS proxying to unicorn
- * 13090 -> wheezy gunicorn
- * 13080 -> wheezy apache proxying to unicorn
- * 13443 -> wheezy apache HTTPS proxying to unicorn
+ * 1X090 -> gunicorn
+ * 1X080 -> apache HTTP reverse proxying to gunicorn
+ * 1X443 -> apache HTTPS reverse proxying to gunicorn
+
+The X varies per VM, again consult the nodes.yaml file
 
 To start developing
 
@@ -59,6 +53,7 @@ Where <VM> is one of:
 
  * precise
  * trusty
+ * xenial
  * jessie
  * wheezy
 

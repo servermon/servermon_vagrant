@@ -78,7 +78,7 @@ class servermon(
         hasstatus => false,
     }
 
-    file { "${directory}/settings.py":
+    file { "${directory}/servermon/settings.py":
         ensure  => $ensure,
         owner   => 'root',
         group   => 'root',

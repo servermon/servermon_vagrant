@@ -1,13 +1,4 @@
 ---
-precise:
-  box: ubuntu/precise64
-  forwarded_ports:
-  - :guest: 8090
-    :host: 10090
-  - :guest: 80
-    :host: 10080
-  - :guest: 443
-    :host: 10443
 trusty:
   box: ubuntu/trusty64
   forwarded_ports:
